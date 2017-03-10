@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#copy old time.txt to time2.txt
+yes | cp ~/backup/time.txt ~/backup/time2.txt
+
+#overwrite old time.txt file with new time
+echo `date +"%Y-%m-%d-%H-%M-%S"` > ~/backup/time.txt
+
+#rsync command
+rsync -avhPR --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r --delete --stats --link-dest=<target_backup_folder>/`cat ~/backup/time2.txt` <folder_to_be_backep_up>/ <target_backup_folder>/`cat ~/backup/time.txt`/
